@@ -4,16 +4,20 @@ class Solution:
         count = 0
         longest = 0
         for start in range(len(s)):
-            for i in range(len(s)-start):
+            seen.append(s[start])
+            count += 1
+            longest = max(longest, count)
+            for i in range(1, len(s)-start):
                 if s[start+i] not in seen:
-                    seen.append(s[start])
+                    seen.append(s[start+i])
                     count += 1
-                else:
                     longest = max(longest, count)
-            count = 0
+                else:
+                    break
+            
             seen = []
+            count = 0
         return longest
 
-
 sol = Solution()
-print(sol.lengthOfLongestSubstring("au"))
+print(sol.lengthOfLongestSubstring("pwwkew"))
