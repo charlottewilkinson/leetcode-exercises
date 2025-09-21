@@ -8,12 +8,12 @@ class Solution:
         p2 = 0
         merged_list = []
 
-        while p1 + p2 <= (n // 2) + 1:
+        while p1 + p2 < (n // 2) + 2:
             if p1 == len(nums1):
-                merged_list += nums2[p2: p2 + (n // 2) + 1 - len(merged_list)]
+                merged_list += nums2[p2: (n // 2) + 1 - p1]
                 break
             elif p2 == len(nums2):
-                merged_list += nums1[p1: p2 + (n // 2) + 1 - len(merged_list)]
+                merged_list += nums1[p1: (n // 2) + 1 - p2]
                 break
             elif nums1[p1] < nums2[p2]:
                 merged_list.append(nums1[p1])
@@ -27,18 +27,18 @@ class Solution:
                 merged_list.append(nums2[p2])
                 p1 += 1
                 p2 += 1
-        
+
         if n % 2 == 0:
             # even
-            median = (merged_list[-2] + merged_list[-1]) / 2
+            median = (merged_list[(n // 2)-1] + merged_list[n // 2]) / 2
 
         else:
             # odd
-            median = merged_list[-1]
+            median = merged_list[(n // 2)]
 
         return median
 
 
 
 s = Solution()
-print(s.findMedianSortedArrays(nums1 = [1,2], nums2 = [3, 4]))
+print(s.findMedianSortedArrays(nums1 = [1,2,4,5,6], nums2 = [3]))
